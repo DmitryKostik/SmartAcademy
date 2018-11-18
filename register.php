@@ -31,7 +31,7 @@ if(isset($_POST['submit']))
         $patronomic = $_POST['patronomic'];
         $birthday = $_POST['birthday'];
         $phone = $_POST['phone'];
-        RegisterUser($login, $password, $first_name, $last_name, $patronomic, $birthday, $phone);
+        registerUser($login, $password, $first_name, $last_name, $patronomic, $birthday, $phone);
         //header("Location: login.php"); exit();
 
     }
