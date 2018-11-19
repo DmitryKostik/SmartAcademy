@@ -46,7 +46,7 @@ if(isset($_POST['submit']))
     }
 }
 ?>
-
+<input type="date" name="dates" id="date">
 <form method="POST">
 Логин <input name="login" type="text"><br>
 Пароль <input name="password" type="password"><br>

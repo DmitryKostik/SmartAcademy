@@ -43,6 +43,15 @@ function getUserByID($id)
 	return $userlogin;
 }
 
+function getUserFIOByID($id)
+{
+	global $link;
+	openDB();
+	$userFIO = mysqli_fetch_array(mysqli_query($link, "SELECT CONCAT_WS(' ',users.user_first_name,users.user_last_name) FROM users WHERE user_id=$id"));
+	closeDB();
+	return $userFIO[0];
+}
+
 function getUserByLogin($login)
 {
   global $link;
@@ -79,16 +88,25 @@ function destroySessionByID($session_id)
   global $link;
   openDB();
   $hash = mysqli_query($link, "UPDATE sessions SET destroyed=0 WHERE session_id = $session_id");
-  echo "UPDATE sessions SET destroyed=0 WHERE session_id = $session_id";
   closeDB();
 }
 
-function getAllStudents(){
-	global $link;
-	openDB();
-	$res = mysqli_query($link,"");
-	closeDB();
-	return $res->fetch_all($resultype=MYSQLI_ASSOC);
+function getMessagesWithUser($sender_id, $adressee_id)
+{
+  global $link;
+  openDB();
+  $messages = mysqli_query($link, "SELECT * FROM messages WHERE (sender_id=$sender_id and adressee_id=$adressee_id) or (sender_id=$adressee_id and adressee_id=$sender_id)");
+  closeDB();
+  return $messages->fetch_all($resultype=MYSQLI_ASSOC);
+}
+
+function addMessagesWithUser($sender_id, $adressee_id, $message)
+{
+  global $link;
+  openDB();
+  $messages = mysqli_query($link, "INSERT INTO messages SET sender_id=$sender_id, adressee_id=$adressee_id, message='$message'");
+  closeDB();
+  return $messages;
 }
 
 function checkAuth()
@@ -105,6 +123,12 @@ function checkAuth()
           $_SESSION['auth'] = true;
           $_SESSION['user_id'] = $userdata['user_id'];
         }
+        else{
+          header("Location: login.php");
+        }
+      }
+      else {
+        header("Location: login.php");
       }
     }
 }

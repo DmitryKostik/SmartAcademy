@@ -7,6 +7,6 @@ include_once "Functions/functions.php";
     destroySessionByID($_COOKIE['sessionid']); //Меняем значение сессии в БД
 		setcookie('sessionid', '', time()); //удаляем логин
 		setcookie('hash', '', time()); //удаляем ключ
-		//header("Location: header.php"); exit();
+		header("Location: header.php"); exit();
 	}
 ?>
