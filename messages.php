@@ -6,6 +6,7 @@ if(isset($_GET['sel']))
 {
   $sel=$_GET['sel'];
   $messages = getMessagesWithUser($_SESSION['user_id'], $sel);
+  $adressee_name = getUserFIOByID($sel);
 
   if (!empty($_POST["send_message"]))
   {

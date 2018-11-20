@@ -1,4 +1,5 @@
 <?php
+echo "<h3 class='text-center'>$adressee_name</h3>";
 for($i=0; $i<count($messages);$i++){
     $id=$messages[$i]["id_message"];
     $message = $messages[$i]["message"];
