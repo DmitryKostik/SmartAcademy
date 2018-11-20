@@ -32,8 +32,7 @@ if(isset($_POST['submit']))
           setcookie("sessionid", $session_id, time()+60*60*24*30);
           setcookie("hash", $hash, time()+60*60*24*30);
         }
-        # Переадресовываем браузер на страницу проверки нашего скрипта
-        //header("Location: check.php"); exit();
+        header("Location: messages.php"); exit();
     }
 
     else

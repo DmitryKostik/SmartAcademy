@@ -46,10 +46,11 @@ if(isset($_POST['but_log']))
 
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="CSS/style.css">
 
 <header class="mb-3">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">USERS</a>
+    <a class="navbar-brand" href="#">SmartAcademy</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -58,15 +59,24 @@ if(isset($_POST['but_log']))
       <?php
       if (empty($_SESSION['auth']) or $_SESSION['auth']==false)
       {
-        echo "<button type='button' class='btn btn-primary ml-auto mx-2' data-toggle='modal' data-target='#Login'>Войти</button>";
       }
       else {
-        $userdata = getUserByID($_SESSION['user_id']);
-        echo "<b class='ml-auto'>".$userdata['user_login']."</b>";
-        echo "<a href='logout.php' class='btn btn-primary mx-2'>Выйти</a>";
+        $username = getUserFIOByID($_SESSION['user_id']);
+        echo "<div class='dropdown ml-auto'>
+        <button type='button' class='btn btn-outline-light dropdown-toggle' id='dropdownMenuOffset' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' data-offset='100,20'>
+        ".$username."
+        </button>
+
+        <div class='dropdown-menu' aria-labelledby='dropdownMenuOffset'>
+          <a class='dropdown-item' href='#'>Моя страница</a>
+          <div class='dropdown-divider'></div>
+          <a class='dropdown-item' href='#'>Another action</a>
+          <div class='dropdown-divider'></div>
+          <a class='dropdown-item' href='logout.php'>Выйти</a>
+        </div>
+      </div>";
       }
       ?>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Calc">Калькулятор</button>
     </div>
   </nav>
 </header>
@@ -98,28 +108,6 @@ if(isset($_POST['but_log']))
         <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
       </div>
     </form>
-    </div>
-  </div>
-</div>
-
-<!-- Калькулятор -->
-
-<div class="modal fade" id="Calc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-        <button type="button" class="btn btn-primary">Расчитать</button>
-      </div>
     </div>
   </div>
 </div>
