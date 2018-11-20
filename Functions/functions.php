@@ -100,6 +100,15 @@ function getMessagesWithUser($sender_id, $adressee_id)
   return $messages->fetch_all($resultype=MYSQLI_ASSOC);
 }
 
+function getLastUserMessages($id)
+{
+  global $link;
+  openDB();
+  $messages = mysqli_query($link, "CALL `getLastUserMessages`('$id')");
+  closeDB();
+  return $messages->fetch_all($resultype=MYSQLI_ASSOC);
+}
+
 function addMessagesWithUser($sender_id, $adressee_id, $message)
 {
   global $link;
