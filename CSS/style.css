@@ -1,13 +1,55 @@
-.users-element{
-  cursor: pointer;
-  z-index: 1;
-}
-
-.users-element:hover{
-  background-color: #007bff;
-  border-color: #007bff;
-}
-
 .bg-dark{
   background-color: #304C64!important;
+  height: 45px;
 }
+
+.user-button{
+  border: none;
+  background-color: transparent;
+  color: white;
+  font-weight: 500;
+  outline: 0!important;
+  outline-offset: 0;
+  border-radius: 0;
+  height: 45px;
+
+}
+.user-button:hover{
+  cursor: pointer;
+  background-color: #3c6587;
+}
+
+.container-1024{
+  width: 1024px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.leftnav .list-group-item{
+  border: none;
+}
+
+.msg, .lastusermsg{
+  word-wrap: break-word;
+}
+
+.lastusermsg{
+  white-space: nowrap; /* Запрещаем перенос строк */
+  overflow: hidden; /* Обрезаем все, что не помещается в область */
+  text-overflow: ellipsis; /* Добавляем многоточие */
+}
+
+.messages-container{
+  max-height: 400px;
+  overflow-x: hidden;
+}
+
+.messages-container::-webkit-scrollbar{width: 5px;height: 5px;}
+.messages-container::-webkit-scrollbar-track-piece{background-color: #ffffff;}
+.messages-container::-webkit-scrollbar-thumb:vertical{height: 5px;background-color: #096BAA;}
+.messages-container::-webkit-scrollbar-thumb:horizontal{width: 5px;background-color: #096BAA;}
+.messages-container::-moz-scrollbar{width: 5px;height: 5px;}
+.messages-container::-moz-scrollbar-track-piece{background-color: #ffffff;}
+.messages-container::-moz-scrollbar-thumb:vertical{height: 5px;background-color: #096BAA;}
+.messages-container::-moz-scrollbar-thumb:horizontal{width: 5px;background-color: #096BAA;}

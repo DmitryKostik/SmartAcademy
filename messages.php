@@ -1,7 +1,7 @@
 <?php
 include_once "Functions/functions.php";
 include "header.php";
-
+echo "<div class='col-10'>";
 if(isset($_GET['sel']))
 {
   $sel=$_GET['sel'];
@@ -21,9 +21,10 @@ else
   $messages = getLastUserMessages($_SESSION['user_id']);
   include "lastUserMessages.php";
 }
+echo "</div></div></div>";
 ?>
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ru" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title></title>
