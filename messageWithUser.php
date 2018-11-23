@@ -15,9 +15,9 @@ for($i=0; $i<count($messages);$i++){
 ?>
 <form class="" action="" method="post">
   <div class="input-group my-3">
-    <input name="message" class="form-control" placeholder="Введите сообщение" rows="1" aria-label="Recipient's username" aria-describedby="button-addon2">
+    <input name="message" class="form-control" placeholder="Введите сообщение" rows="1" aria-label="Recipient's username" aria-describedby="input">
     <div class="input-group-append">
-      <input class="btn btn-outline-secondary" name="send_message" type="submit" id="button-addon2"></button>
+      <input class="btn btn-outline-secondary" name="send_message" type="submit" id="input">
     </div>
   </div>
 </form>
