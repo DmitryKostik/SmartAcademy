@@ -30,7 +30,7 @@
   border: none;
 }
 
-.msg, .lastusermsg{
+.msgtext, .lastusermsg{
   word-wrap: break-word;
 }
 
@@ -44,6 +44,12 @@
   max-height: 400px;
   overflow-x: hidden;
 }
+
+.sender-name{
+  font-weight:400;
+}
+
+
 
 .messages-container::-webkit-scrollbar{width: 5px;height: 5px;}
 .messages-container::-webkit-scrollbar-track-piece{background-color: #ffffff;}
