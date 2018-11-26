@@ -1,13 +1,25 @@
 <?php
 echo "<h6 class='text-center'>$adressee_name</h6><div class='messages-container mt-2 ml-2'>";
+$first=0;
 for($i=0; $i<count($messages);$i++){
     $id=$messages[$i]["id_message"];
     $message = $messages[$i]["message"];
     $date = $messages[$i]["message_date"];
+    if ($messages[$i]["unread"]==true && $first==0) {
+      $unread="<hr class='first-message'><div class='msg unread'>";
+      $first=1;
+    }
+    elseif ($messages[$i]["unread"]==true && $first==1) {
+      $unread = "<div class='msg unread'>";
+    }
+    else {
+      $unread = "<div class='msg'>";
+    }
     $FIO = getUserFIOByID($messages[$i]["sender_id"]);
-    echo "<div class='msg'><div class='info'><div class='sender-name'><b>$FIO<span> $date</span></b></div><div class='msgtext mb-2'>$message</div></div></div>";
+    echo $unread."<div class='info'><div class='sender-name'><b>$FIO<span> $date</span></b></div><div class='msgtext mb-2'>$message</div></div></div>";
     }
     echo "</div>";
+    updateUnreadStatus($_SESSION['user_id'], $sel);
 ?>
 
   <div class="input-group my-3">
@@ -23,7 +35,7 @@ for($i=0; $i<count($messages);$i++){
 <script type="text/javascript">
 
 function tpl(t) {
-	html = ' <div class="msg">';
+	html = ' <div class="msg unread ' + t.class +'">';
 	html += '<div class="info">';
 	html += '         <div class="name"><b>' + t.name + '<span> ' + t.time + '</span></b></div>';
 	html += '        <div class="msgtext mb-2">'+t.text+'</div>';
@@ -49,7 +61,7 @@ function timeConverter(UNIX_timestamp){
 
 $(window).load(function() {
 
-    var socket = io.connect('http://localhost:8080');
+    var socket = io.connect('http://dmitrykostik.tk:8880');
 
     socket.on('connect', function () {
 		  var id = '<?=$sel;?>'; // ID друга
@@ -57,7 +69,7 @@ $(window).load(function() {
       var div = $(".messages-container");
       div.scrollTop(div.prop('scrollHeight'));
   		socket.id = id;
-  		socket.emit('adduser', '<?=$_SESSION['auth'];?>', '<?=$_SESSION['user_id'];?>',id, '<?=$adressee_name;?>');
+  		socket.emit('adduser', '<?=$_SESSION['auth'];?>', '<?=$_SESSION['user_id'];?>',id, '<?=getUserFIOByID($_SESSION['user_id']);?>');
 
 
 		// Получаем сообщения
@@ -70,11 +82,28 @@ $(window).load(function() {
 				// Шаблончик
 				html = tpl(msg);
 
-				// Добавляем сообщение
-				$('.messages-container').append(html);
+				$.when($('.messages-container').append(html))
+        .done(function(){
+          $('.messages-container').mousemove(function(){
+            if($('.msg').hasClass('unread incoming')){
+            socket.emit('readmessage',);
+            $(".msg").removeClass('unread incoming');
+
+
+          };
+          });
+        });
         var div = $(".messages-container");
         div.scrollTop(div.prop('scrollHeight'));
 			}
+        });
+
+        socket.on('readAll', function(userSend) {
+      // Проверка на принятия сообщения именно от того пользователя, с которым мы разговариваем в данный момент
+          if(userSend == id)
+          {
+            $(".msg").removeClass('unread sending');
+          }
         });
 
         // При нажатии <Enter>
@@ -92,7 +121,8 @@ $(window).load(function() {
 				var msg = {
 				  name:  '<?=getUserFIOByID($_SESSION['user_id'])?>', // Выводим логин пользователя
 				  text: input.replace(/(\n(\r)?)/g, ' <br/>'), // Текст сообщения
-				  time: newDate
+				  time: newDate,
+          class: "sending"
 				};
 
 				// Загружаем "шаблончик" нашего сообщения
@@ -123,7 +153,8 @@ $(window).load(function() {
         var msg = {
           name:  '<?=getUserFIOByID($_SESSION['user_id'])?>', // Выводим логин пользователя
           text: input.replace(/(\n(\r)?)/g, ' <br/>'), // Текст сообщения
-          time: newDate
+          time: newDate,
+          class: "sending"
         };
 
         // Загружаем "шаблончик" нашего сообщения
@@ -138,6 +169,7 @@ $(window).load(function() {
                 $('#input').val('');
 
         });
+
 
     });
 });

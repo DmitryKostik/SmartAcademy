@@ -49,7 +49,34 @@
   font-weight:400;
 }
 
+.unread{
+  background-color: #EDF0F5;
+}
 
+
+.first-message{
+
+  padding: 0;
+  text-align: center;
+  border: none;
+  border-top: solid 1px;
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  margin-left: auto;
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
+
+.first-message::after{
+  background-color: white;
+  position: relative;
+  top: -.7em;
+  padding: 0 .25em;
+  content: 'Новые сообщения';
+  font-weight: 400;
+  font-size: 15px;
+}
 
 .messages-container::-webkit-scrollbar{width: 5px;height: 5px;}
 .messages-container::-webkit-scrollbar-track-piece{background-color: #ffffff;}

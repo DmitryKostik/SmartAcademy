@@ -44,7 +44,7 @@ checkAuth();
   <div class="row">
     <div class="col-2">
       <div class="leftnav">
-        <a href="messages.php" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">Сообщения<span class="badge badge-primary badge-pill">14</span></a>
+        <a href="messages.php" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">Сообщения<span class="badge badge-primary badge-pill">0</span></a>
         <a href="#" class="list-group-item list-group-item-action">Мероприятия</a>
         <a href="#" class="list-group-item list-group-item-action">Документы</a>
         <a href="#" class="list-group-item list-group-item-action">Приложения</a>

@@ -130,6 +130,17 @@ function addMessagesWithUser($sender_id, $adressee_id, $message)
   return $messages;
 }
 
+function updateUnreadStatus($my_id, $friend_id)
+{
+  global $link;
+  openDB();
+  $unread = mysqli_query($link, "UPDATE messages SET unread=0 WHERE adressee_id=$my_id AND sender_id=$friend_id");
+  closeDB();
+  return $unread;
+}
+
+
+
 function checkAuth()
 {
   session_start();
