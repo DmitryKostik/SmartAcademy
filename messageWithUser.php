@@ -1,16 +1,11 @@
 <?php
 echo "<h6 class='text-center'>$adressee_name</h6><div class='messages-container mt-2 ml-2'>";
-$first=0;
 for($i=0; $i<count($messages);$i++){
     $id=$messages[$i]["id_message"];
     $message = $messages[$i]["message"];
     $date = $messages[$i]["message_date"];
-    if ($messages[$i]["unread"]==true && $first==0) {
-      $unread="<hr class='first-message'><div class='msg unread'>";
-      $first=1;
-    }
-    elseif ($messages[$i]["unread"]==true && $first==1) {
-      $unread = "<div class='msg unread'>";
+    if ($messages[$i]["unread"]==true) {
+      $unread="<div class='msg unread'>";
     }
     else {
       $unread = "<div class='msg'>";
@@ -22,12 +17,14 @@ for($i=0; $i<count($messages);$i++){
     updateUnreadStatus($_SESSION['user_id'], $sel);
 ?>
 
+<form id="form-send" action="" method="post">
   <div class="input-group my-3">
-    <textarea class="form-control" id="input" name="textarea" placeholder="Введите сообщение.." rows="3" cols="54"></textarea>
-    <div class="input-group-append">
-      <button class="btn btn-outline-secondary" id="btn-send">Отправить</button>
-    </div>
+      <textarea class="form-control" id="input" name="textarea" placeholder="Введите сообщение.." rows="3" cols="54"></textarea>
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" name="btn_send" id="btn-send">Отправить</button>
+      </div>
   </div>
+</form>
 
 
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
@@ -60,14 +57,14 @@ function timeConverter(UNIX_timestamp){
 
 
 $(window).load(function() {
-
+  var div = $(".messages-container");
+  div.scrollTop(div.prop('scrollHeight'));
     var socket = io.connect('http://dmitrykostik.tk:8880');
 
     socket.on('connect', function () {
 		  var id = '<?=$sel;?>'; // ID друга
 
-      var div = $(".messages-container");
-      div.scrollTop(div.prop('scrollHeight'));
+
   		socket.id = id;
   		socket.emit('adduser', '<?=$_SESSION['auth'];?>', '<?=$_SESSION['user_id'];?>',id, '<?=getUserFIOByID($_SESSION['user_id']);?>');
 
@@ -141,7 +138,7 @@ $(window).load(function() {
 
 
         //При нажатии на кнопку
-        $('#btn-send').on('click', function() {
+        $('#form-send').submit( function() {
 
         input = $('#input').val();
 
@@ -167,10 +164,8 @@ $(window).load(function() {
         // Отправляем
                 socket.emit('msg', input);
                 $('#input').val('');
-
+                return false;
         });
-
-
     });
 });
 </script>

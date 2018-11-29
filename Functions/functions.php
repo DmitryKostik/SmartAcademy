@@ -139,6 +139,25 @@ function updateUnreadStatus($my_id, $friend_id)
   return $unread;
 }
 
+function getCountUnreadDialogs($id)
+{
+  global $link;
+  openDB();
+  $dialogscount = mysqli_fetch_array(mysqli_query($link, "CALL getCountUnreadDialogs($id)"));
+  closeDB();
+  return $dialogscount[0];
+}
+
+function getCountUnreadMessagesInDialog($my_id, $sender_id)
+{
+  global $link;
+  openDB();
+  $msgcount = mysqli_fetch_array(mysqli_query($link, "SELECT count(unread) FROM messages WHERE adressee_id=$my_id AND unread=1 AND sender_id=$sender_id GROUP BY sender_id"));
+  closeDB();
+  return $msgcount[0];
+}
+
+
 
 
 function checkAuth()
