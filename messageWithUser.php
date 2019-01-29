@@ -1,4 +1,5 @@
 <?php
+
 echo "<h6 class='text-center'>$adressee_name</h6><div class='messages-container mt-2 ml-2'>";
 for($i=0; $i<count($messages);$i++){
     $id=$messages[$i]["id_message"];
@@ -21,7 +22,7 @@ for($i=0; $i<count($messages);$i++){
   <div class="input-group my-3">
       <textarea class="form-control" id="input" name="textarea" placeholder="Введите сообщение.." rows="3" cols="54"></textarea>
       <div class="input-group-append">
-        <button class="btn btn-outline-secondary" name="btn_send" id="btn-send">Отправить</button>
+        <button class="btn btn-outline-secondary" type="submit" name="btn_send" id="btn-send">Отправить</button>
       </div>
   </div>
 </form>

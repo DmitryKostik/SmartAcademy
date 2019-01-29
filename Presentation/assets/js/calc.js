@@ -66,7 +66,6 @@ $(document).ready(function() {
 					for(distribute in distributeName){
 						html+='<div class="d-block"><label><input class="pl-2" type="checkbox" distribute-price = "' + distributeName[distribute][1] + '"> '+ distribute +'</label></div>';
 					}
-					console.log(html);
 					$('#distribute-name').empty();
 					$('#distribute-name').append(html);
 				}
@@ -98,7 +97,6 @@ $(document).ready(function() {
          priceDistribute=0;
          $("input[type='checkbox']:checked").each(function () {
            priceDistribute+=parseInt($(this).attr('distribute-price'));
-           console.log($(this).attr('distribute-price'));
          });
          $('#tb-distribute').text(priceDistribute);
          total();

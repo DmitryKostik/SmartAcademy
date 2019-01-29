@@ -285,12 +285,12 @@ a:focus {
 }
 
 .hero-carousel .item-1 {
-  height: 560px;
+  height: 660px;
   background-position: center center;
 }
 
 .hero-carousel .item-1 {
-  background-image: url("../images/hero-1.jpg");
+  background-image: url("../images/fon.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -313,9 +313,14 @@ a:focus {
   margin-top: 15px;
 }
 
+.chart {
+  width: 100%;
+  min-height: 500px;
+}
+
 /* ======= About Section ======= */
 .about-section {
-  padding-top: 90px;
+  padding-top: 150px;
 }
 
 .about-section .section-title {
@@ -498,7 +503,7 @@ color: black;
 }
 
 .feature-nav .nav-link .svg-inline--fa {
-  margin-right: 15px;
+  margin-right: 5px;
   width: 20px;
   font-size: 30px;
   position: relative;
